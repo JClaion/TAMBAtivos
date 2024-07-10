@@ -11,12 +11,12 @@
          */
         public function up(): void
         {
-            Schema::create('tbl_localizacao', function (Blueprint $table) {
+            Schema::create('localizacaos', function (Blueprint $table) {
                 $table->id();
 
-                $table->string('floor');
-                $table->string('room');
-                $table->unsignedBigInteger('tb_blocksector_idtb_blocksector');
+                $table->string('floor')->default('Piso qualquer');
+                $table->string('room')->default('Sala qualquer');
+                $table->unsignedBigInteger('tb_blocksector_idtb_blocksector')->default(0);
                 
                 $table->timestamps();
             });
@@ -42,6 +42,6 @@
          */
         public function down(): void
         {
-            Schema::dropIfExists('tbl_localizacao');
+            Schema::dropIfExists('localizacaos');
         }
     };
