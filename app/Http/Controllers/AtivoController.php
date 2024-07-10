@@ -12,7 +12,7 @@ class AtivoController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.produtos.ativo');
     }
 
     /**
