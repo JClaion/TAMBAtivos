@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -11,7 +12,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        //Paginate para os usuários, itens, ativos, 
+        //Gerenciar itens de cadastramento de itens, ativos e etc.
         //
+
+        $users = User::all();
+        return view('admin.teste', ['users' => $users]);
     }
 
     /**
