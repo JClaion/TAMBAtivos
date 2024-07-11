@@ -1,15 +1,18 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RelatorioController;
-use App\Http\Controllers\AtivoController;
-
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/adminscreen', function (){
+    return view('admin.index');
+});
+
 
 
 Route::get('/teste_lista', [UserController::class , 'index'])->name('teste_lista.index');

@@ -15,7 +15,7 @@ class UserController extends Controller
 
         $users = User::all();
         return view('admin.user.teste_lista', [
-            'user' => $users
+            'users' => $users
         ]);
         
     }
