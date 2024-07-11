@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -15,7 +17,7 @@ class UserController extends Controller
 
         $users = User::all();
         return view('admin.user.teste_lista', [
-            'users' => $users
+            'users' => DB::table('users')->paginate(15)
         ]);
         
     }

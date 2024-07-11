@@ -6,7 +6,7 @@
     @include('components.navbar')
     @include('components.sidebar')
 
-<table>
+<table style = "margin-right: 30 px">
     <tr>
         <th>Nome:</th>
         <th>E-mail:</th>
@@ -25,5 +25,8 @@
 
     @endforeach
 </table>
+
+{{ $users->links() }}
+
 
 @endsection
