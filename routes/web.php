@@ -15,17 +15,27 @@ Route::get('/adminscreen', function (){
 });
 
 
+Route::group([
 
-Route::get('/teste_lista', [UserController::class , 'index'])->name('teste_lista.index');
-Route::post('/teste_lista', [UserController::class, 'store'])->name('teste_lista.store');
-Route::get('/relatorio', [RelatorioController::class , 'index'])->name('relatorio.index');
-Route::get('/ativo', [AtivoController::class , 'index'])->name('ativo.index');
+    'prefix' => 'admin',
+    'as' => 'admin.',
+
+], function(){
+
+    Route::get('/teste_lista', [UserController::class , 'index'])->name('teste_lista.index');
+    Route::post('/teste_lista', [UserController::class, 'store'])->name('teste_lista.store');
+    Route::get('/relatorio', [RelatorioController::class , 'index'])->name('relatorio.index');
+    Route::get('/ativo', [AtivoController::class , 'index'])->name('ativo.index');
 
 
-Route::get('/teste_lista/{id}/edit', [UserController::class, 'edit'])->name('teste_lista.edit');
-Route::put('/teste_lista/{user}', [UserController::class, 'update'])->name('teste_lista.update');
+    Route::get('/teste_lista/{id}/edit', [UserController::class, 'edit'])->name('teste_lista.edit');
 
-Route::delete('/teste_lista/{id}/destroy', [UserController::class, 'destroy'])->name('teste_lista.destroy');
+
+    Route::put('/teste_lista/{user}', [UserController::class, 'update'])->name('teste_lista.update');
+    Route::delete('/teste_lista/{id}/destroy', [UserController::class, 'destroy'])->name('teste_lista.destroy');
+
+});
+
 
 
 Route::get('/dashboard', function () {

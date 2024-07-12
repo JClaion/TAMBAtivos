@@ -55,7 +55,7 @@ class UserController extends Controller
 
         if(!$user = User::find($id)){
 
-            return redirect()->route('teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+            return redirect()->route('admin.teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
         }
 
         return view('admin.user.edit', compact('user'));
@@ -79,7 +79,7 @@ class UserController extends Controller
 
         ]));
 
-        return redirect()->route('teste_lista.index')->with('success', 'Usuário editado com sucesso!');
+        return redirect()->route('admin.teste_lista.index')->with('success', 'Usuário editado com sucesso!');
     }
 
     /**
@@ -89,13 +89,13 @@ class UserController extends Controller
     {
         if(!$user = User::find($id)){
 
-            return redirect()->route('teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+            return redirect()->route('admin.teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
         }
 
         $user->delete();
         
 
-        return redirect()->route('teste_lista.index')->with('delete-success', 'Usuário excluído com sucesso!');
+        return redirect()->route('admin.teste_lista.index')->with('delete-success', 'Usuário excluído com sucesso!');
         
     }
 }
