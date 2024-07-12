@@ -1,7 +1,8 @@
 <?php
 
-
+use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelatorioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -16,8 +17,13 @@ Route::get('/adminscreen', function (){
 
 
 Route::get('/teste_lista', [UserController::class , 'index'])->name('teste_lista.index');
+Route::post('/teste_lista', [UserController::class, 'store'])->name('teste_lista.store');
 Route::get('/relatorio', [RelatorioController::class , 'index'])->name('relatorio.index');
 Route::get('/ativo', [AtivoController::class , 'index'])->name('ativo.index');
+
+
+Route::get('/teste_lista/{id}/edit', [UserController::class, 'edit'])->name('teste_lista.edit');
+Route::put('/teste_lista/{user}', [UserController::class, 'update'])->name('teste_lista.update');
 
 
 Route::get('/dashboard', function () {

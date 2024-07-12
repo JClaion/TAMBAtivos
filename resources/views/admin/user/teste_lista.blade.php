@@ -6,11 +6,13 @@
     @include('components.navbar')
     @include('components.sidebar')
 
+
 <table style = "margin-right: 30 px">
     <tr>
         <th>Nome:</th>
         <th>E-mail:</th>
         <th>Cargo:</th>
+        <th >Ação:</th>
     </tr>
 
     @foreach ($users as $user)
@@ -21,12 +23,15 @@
         <td>{{$user->email}}</td>
         <td>{{$user->role}}</td>
 
+        <td>
+            <a href="{{route('teste_lista.edit', $user->id)}}">Edit</a>
+        </td>
+
     </tr>
 
     @endforeach
 </table>
 
 {{ $users->links() }}
-
 
 @endsection

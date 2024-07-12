@@ -35,7 +35,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // User::create($request->all());
+        // return redirect()->route('teste_lista.index');
     }
 
     /**
@@ -51,7 +52,13 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        if(!$user = User::find($id)){
+
+            return redirect()->route('teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+        }
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -59,7 +66,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if(!$user = User::find($id)){
+
+            return back()->with('message', 'Usuário não encontrado');
+        }
+
+        $user->update($request->only([
+
+            'name',
+            'email',
+            'password'
+
+        ]));
+
+        return redirect()->route('teste_lista.index')->with('success', 'Usuário editado com sucesso!');
     }
 
     /**
