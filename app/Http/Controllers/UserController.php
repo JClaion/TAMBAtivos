@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         if(!$user = User::find($id)){
 
-            return back()->with('message', 'Usuário não encontrado');
+            return back()->with('error-user-not-found', 'Usuário não encontrado');
         }
 
         $user->update($request->only([
@@ -87,6 +87,15 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(!$user = User::find($id)){
+
+            return redirect()->route('teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+        }
+
+        $user->delete();
+        
+
+        return redirect()->route('teste_lista.index')->with('delete-success', 'Usuário excluído com sucesso!');
+        
     }
 }

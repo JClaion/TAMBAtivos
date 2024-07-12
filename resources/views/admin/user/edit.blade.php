@@ -1,4 +1,4 @@
-@extends('admin.index');
+@extends('admin.index')
 
 @section ('title', 'Lista de usuários')
 
@@ -13,7 +13,6 @@
     <form action="{{route('teste_lista.update', $user->id)}}" method="POST">
 
         @csrf()
-
         @method('PUT')
 
         <label>Nome:</label>
@@ -24,6 +23,16 @@
         <input type="text" name = "password"><br>
 
         <input type="submit" name = "edit_submit">
+    </form>
+
+    <form action="{{route('teste_lista.destroy', $user->id)}}" method = "POST">
+
+        @csrf()
+
+        @method('delete')
+
+        <input type="submit" value = "Excluir usuário">
+
     </form>
 
 

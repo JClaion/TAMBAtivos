@@ -1,10 +1,11 @@
-@extends('admin.index');
+@extends('admin.index')
 
 @section ('title', 'Lista de usuários')
 
 @section('content')
     @include('components.navbar')
     @include('components.sidebar')
+    <h2>@include('components.alert')</h2>
 
 
 <table style = "margin-right: 30 px">

@@ -25,6 +25,8 @@ Route::get('/ativo', [AtivoController::class , 'index'])->name('ativo.index');
 Route::get('/teste_lista/{id}/edit', [UserController::class, 'edit'])->name('teste_lista.edit');
 Route::put('/teste_lista/{user}', [UserController::class, 'update'])->name('teste_lista.update');
 
+Route::delete('/teste_lista/{id}/destroy', [UserController::class, 'destroy'])->name('teste_lista.destroy');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
