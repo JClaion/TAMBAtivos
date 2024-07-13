@@ -8,31 +8,31 @@
         <li class="nav-item">
             <a href="#" class="nav-link active bg-success text-white" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                Home
+                Ativos
             </a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark text-white">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
+                Itens
             </a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark text-white">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                Orders
+                Usuários
             </a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark text-white">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                Products
+                Locais
             </a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark text-white">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                Customers
+                Estatísticas
             </a>
         </li>
     </ul>
