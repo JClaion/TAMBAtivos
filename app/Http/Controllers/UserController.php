@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-
 class UserController extends Controller
 {
     /**
@@ -14,12 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $users = User::paginate(15);
         return view('admin.user.teste_lista', [
             'users' => $users
         ]);
-        
     }
 
     /**
