@@ -57,7 +57,14 @@
                 @endif
                 <!-- Usar radio??? -->
                 <label class="form-label">Condição:</label>
-                <input type="text" class="form-control" name = "condition" value = "{{old('condition')}}"><br>
+                    <select class="form-select" name="condition">
+                        <option value="new" {{ old('condition') == 'new' ? 'selected' : '' }}>Novo</option>
+                        <option value="used" {{ old('condition') == 'used' ? 'selected' : '' }}>Usado</option>
+                        <option value="old" {{ old('condition') == 'old' ? 'selected' : '' }}>Antigo</option>
+                        <option value="damaged" {{ old('condition') == 'damanged' ? 'selected' : '' }}>Danificado</option>
+                        <option value="broken" {{ old('condition') == 'broken' ? 'selected' : '' }}>Quebrado</option>
+                    </select>
+                <!-- <input type="text" class="form-control" name = "condition" value = "{{old('condition')}}"><br> -->
 
                 @if ($errors->has('condition'))
                     <span class="error" style="color: red;">{{ $errors->first('condition') }}</span><br>
@@ -69,9 +76,6 @@
                 @foreach ($itens as $item)
                     <option selected value="{{$item->id}}" {{ old('tb_item_id_fk') == '$item->id' ? 'selected' : '' }}>{{$item->name}}</option>
                 @endforeach 
-
-                <!-- Você chupa? Ou não chupa? -->
-
                 
                 </select><br>
 

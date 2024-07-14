@@ -25,13 +25,34 @@
                 @foreach ($assets as $asset)
             
                 <tr>
-
                     <td>{{$asset->name_asset}}</td>
                     <td>{{$asset->type}}</td>
                     <td>{{$asset->serial_number}}</td>
                     <td>{{$asset->description}}</td>
                     <td>{{$asset->validity}}</td>
-                    <td>{{$asset->condition}}</td>
+                    <td>
+                        @php
+                            $condition = '';
+                            switch ($asset->condition) {
+                                case 'used':
+                                    $condition = 'Usado';
+                                    break;
+                                case 'broken':
+                                    $condition = 'Quebrado';
+                                    break;
+                                case 'damaged':
+                                    $condition = 'Danificado';
+                                    break;
+                                case 'old':
+                                    $condition = 'Antigo';
+                                    break;
+                                default:
+                                    $condition = 'Desconhecido';
+                                    break;
+                            }
+                        @endphp
+                        {{ $condition }}
+                    </td>
                     <td>{{$asset->item->name}}</td>
                     <td>{{$asset->local->room}} | {{$asset->local->floor}} | Bloco {{$asset->local->blockSector->block_sector}}</td>
 
