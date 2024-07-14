@@ -21,15 +21,15 @@ Route::group([
 
 ], function(){
 
-    Route::get('/teste_lista', [UserController::class , 'index'])->name('teste_lista.index');
+    Route::get('/user', [UserController::class , 'index'])->name('user.index');
     Route::get('/relatorios', [RelatorioController::class , 'index'])->name('relatorio.index');
     Route::get('/ativos', [AtivoController::class , 'index'])->name('ativo.index');
 
-    Route::get('/teste_lista/{id}/edit', [UserController::class, 'edit'])->name('teste_lista.edit');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 
-    Route::put('/teste_lista/{user}', [UserController::class, 'update'])->name('teste_lista.update');
-    Route::delete('/teste_lista/{id}/destroy', [UserController::class, 'destroy'])->name('teste_lista.destroy');
-    Route::post('/teste_lista', [UserController::class, 'store'])->name('teste_lista.store');
+    Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
 
     Route::get('/ativos/{id}/edit', [AtivoController::class, 'edit'])->name('ativos.edit');
     Route::put('/ativos/{asset}', [AtivoController::class, 'update'])->name('ativos.update');
@@ -38,11 +38,10 @@ Route::group([
     Route::post('/ativos/cadastro', [AtivoController::class, 'store'])->name('ativos.store');
 
 
-
 });
 
 Route::get('/lista', function () {
-    return view('admin.user.teste_lista');
+    return view('admin.user.user');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

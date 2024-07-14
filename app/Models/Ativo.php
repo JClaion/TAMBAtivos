@@ -41,6 +41,9 @@ class Ativo extends Model
 
     public function local()
     {
-        return $this->belongsTo(Localizacao::class);
+        return $this->belongsTo(Localizacao::class, 'tb_local_id_fk');
+    }
+    public function item(){
+        return $this->belongsTo(Item::class, 'tb_item_id_fk');
     }
 }
