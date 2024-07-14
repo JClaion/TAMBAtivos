@@ -10,7 +10,7 @@
     <h1>Editar usuário {{$user->name}}</h1>
 
 
-    <form action="{{route('admin.teste_lista.update', $user->id)}}" method="POST">
+    <form action="{{route('admin.user.update', $user->id)}}" method="POST">
 
         @csrf()
         @method('PUT')
@@ -25,7 +25,7 @@
         <input type="submit" name = "edit_submit">
     </form>
 
-    <form action="{{route('admin.teste_lista.destroy', $user->id)}}" method = "POST">
+    <form action="{{route('admin.user.destroy', $user->id)}}" method = "POST">
 
         @csrf()
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ativo;
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Localizacao;
 
 class AtivoController extends Controller
 {
@@ -18,7 +20,12 @@ class AtivoController extends Controller
 
     public function create()
     {
-        return view('admin.produtos.cad_ativo');
+        $itens = Item::all();
+        $locais = Localizacao::all();
+        return view('admin.produtos.cad_ativo', [
+            'itens' => $itens,
+            'locais' => $locais
+        ]);
     }
     
     public function store(Request $request)
@@ -33,10 +40,10 @@ class AtivoController extends Controller
         // $tb_local_id_fk = $request->tb_local_id_fk;
 
         $validatedData = $request->validate([
-            'name_asset' => 'required|string|max:255',
+            'name_asset' => 'required|string|max:255|unique:ativos,name_asset',
             'type' => 'required|string|max:10',
             'description' => 'required|string',
-            'serial_number' => 'required|string|max:45',
+            'serial_number' => 'required|string|max:45|unique:ativos,serial_number',
             'validity' => 'required|date',
             'condition' => 'required|string|max:15',
             'tb_local_id_fk' => 'required|exists:localizacaos,id',
@@ -46,7 +53,8 @@ class AtivoController extends Controller
         [
             'name_asset.required' => 'O nome do ativo e obrigatório',
             'name_asset.max' => 'Não é possível passar de 255 caracteres.',
-
+            'name_asset.unique' => 'Ativo já cadastrado',
+            
             'type.required' => 'O nome do tipo é obrigatório',
             'type.max' => 'Não é possível passar de 10 caracteres.',
 

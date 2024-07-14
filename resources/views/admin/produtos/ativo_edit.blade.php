@@ -45,7 +45,7 @@
         <input type="submit" name = "edit_submit">
     </form>
 
-    <form action="{{route('admin.teste_lista.destroy', $asset->id)}}" method = "POST">
+    <form action="{{route('admin.user.destroy', $asset->id)}}" method = "POST">
 
         @csrf()
 
