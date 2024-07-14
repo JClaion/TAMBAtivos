@@ -38,6 +38,7 @@ Route::group([
     Route::post('/ativos/cadastro', [AtivoController::class, 'store'])->name('ativos.store');
 
 
+
 });
 
 Route::get('/lista', function () {

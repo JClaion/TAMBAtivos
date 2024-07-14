@@ -20,7 +20,6 @@ class AtivoController extends Controller
     {
         return view('admin.produtos.cad_ativo');
     }
-
     
     public function store(Request $request)
     {
@@ -32,9 +31,43 @@ class AtivoController extends Controller
         // $condition = $request->condition;
         // $tb_item_id_fk = $request->tb_item_id_fk;
         // $tb_local_id_fk = $request->tb_local_id_fk;
-        
-        Ativo::create($request->all());
-        return redirect()->route('admin.ativo.index');
+
+        $validatedData = $request->validate([
+            'name_asset' => 'required|string|max:255',
+            'type' => 'required|string|max:10',
+            'description' => 'required|string',
+            'serial_number' => 'required|string|max:45',
+            'validity' => 'required|date',
+            'condition' => 'required|string|max:15',
+            'tb_local_id_fk' => 'required|exists:localizacaos,id',
+            'tb_item_id_fk' => 'required|exists:items,id',
+
+        ], 
+        [
+            'name_asset.required' => 'O nome do ativo e obrigatório',
+            'name_asset.max' => 'Não é possível passar de 255 caracteres.',
+
+            'type.required' => 'O nome do tipo é obrigatório',
+            'type.max' => 'Não é possível passar de 10 caracteres.',
+
+            'description.required' => 'A descrição é obrigatória',
+
+            'validity.required' => 'A data de validade é obrigatória',
+
+            'condition.required' => 'O campo de condição é obrigatório.',
+            'condition.max' => 'Não é possível passar de 15 caracteres.',
+
+            'tb_local_id_fk.required' => 'O local é obrigatório',
+   
+            'tb_item_id_fk.required' => 'O item é obrigatório',
+
+            'serial_number.required' => 'O número serial é obrigatório',
+            'serial_number.max' => 'O número serial deve ter, no máximo, 45 caracteres'
+
+        ]);
+
+        Ativo::create($validatedData);
+        return redirect()->route('admin.ativo.index')->with('sucess', 'Ativo cadastrado com sucesso');
     }
 
     /**
@@ -84,9 +117,7 @@ class AtivoController extends Controller
         return redirect()->route('admin.ativos')->with('success', 'Ativo editado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Ativo $asset)
     {
         //

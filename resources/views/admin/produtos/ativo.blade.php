@@ -22,6 +22,7 @@
                 @foreach ($assets as $asset)
             
                 <tr>
+
             
                     <td>{{$asset->name_asset}}</td>
                     <td>{{$asset->type}}</td>
