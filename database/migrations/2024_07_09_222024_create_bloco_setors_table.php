@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_categoria', function (Blueprint $table) {
+        Schema::create('block_sectors', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('block_sector')->default('bloco/setor qualquer');
+            $table->integer('quantity_assets')->default(0);
+            $table->text('sub_equipment');
+        
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_categoria');
+        Schema::dropIfExists('block_sectors');
     }
 };

@@ -1,5 +1,5 @@
 @extends('template.main')
-@section('title', 'AdminScreen')
+@section('title', 'Tela do administrador')
 
 
 @section('content')

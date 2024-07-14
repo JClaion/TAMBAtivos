@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_item', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
-            $table->string('serial_number'); 
+            $table->string('name')->default('Nome item qualquer'); 
+            $table->string('serial_number')->default('Numero serial item qualquer'); 
             $table->enum('condition', ['new', 'used', 'damaged']); 
-            $table->string('item_type'); 
+            $table->string('item_type')->default('Tipo de item qualquer'); 
             $table->string('inventory_code')->nullable(); 
             $table->date('acquisition_date')->nullable(); 
-            $table->unsignedBigInteger('category_id'); 
+            $table->unsignedBigInteger('category_id')->default(000000); 
             $table->timestamps(); 
-
-            $table->foreign('category_id')->references('id')->on('tbl_categoria')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_item');
+        Schema::dropIfExists('items');
     }
 };

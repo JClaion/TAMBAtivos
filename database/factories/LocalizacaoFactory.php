@@ -17,7 +17,8 @@ class LocalizacaoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-        ];
+            // 'floor',
+            // 'room'
+        ]; 
     }
 }

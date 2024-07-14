@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -11,7 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
+        $users = User::paginate(15);
+        return view('admin.user.teste_lista', [
+            'users' => $users
+        ]);
+        
     }
 
     /**
@@ -27,7 +35,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // User::create($request->all());
+        // return redirect()->route('teste_lista.index');
     }
 
     /**
@@ -43,7 +52,13 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        if(!$user = User::find($id)){
+
+            return redirect()->route('admin.teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+        }
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -51,7 +66,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if(!$user = User::find($id)){
+
+            return back()->with('error-user-not-found', 'Usuário não encontrado');
+        }
+
+        $user->update($request->only([
+
+            'name',
+            'email',
+            'password'
+
+        ]));
+
+        return redirect()->route('admin.teste_lista.index')->with('success', 'Usuário editado com sucesso!');
     }
 
     /**
@@ -59,6 +87,15 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(!$user = User::find($id)){
+
+            return redirect()->route('admin.teste_lista.index')->with('error-user-not-found', 'Usuário não encontrado');
+        }
+
+        $user->delete();
+        
+
+        return redirect()->route('admin.teste_lista.index')->with('delete-success', 'Usuário excluído com sucesso!');
+        
     }
 }

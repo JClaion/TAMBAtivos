@@ -12,29 +12,35 @@ class AtivoController extends Controller
      */
     public function index()
     {
-        //
+        $assets = ativo::paginate(10);
+        return view('admin.produtos.ativo', ['assets' => $assets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.produtos.cad_ativo');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        // $name_asset = $request->name_asset;
+        // $type = $request->type;
+        // $serial_number = $request->serial_number;
+        // $description = $request->description;
+        // $validity = $request->validity;
+        // $condition = $request->condition;
+        // $tb_item_id_fk = $request->tb_item_id_fk;
+        // $tb_local_id_fk = $request->tb_local_id_fk;
+        
+        Ativo::create($request->all());
+        return redirect()->route('admin.ativo.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ativo $ativo)
+    public function show(Ativo $assets)
     {
         //
     }
@@ -42,23 +48,46 @@ class AtivoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ativo $ativo)
+    public function edit(Ativo $asset)
     {
-        //
+        if(!$asset = Ativo::find($asset)){
+
+            return redirect()->route('admin.ativos')->with('asset-not-found', 'Ativo não encontrado');
+        }
+
+        return view('admin.produtos.ativos_edit', compact('asset'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ativo $ativo)
+    public function update(Request $request, Ativo $asset)
     {
-        //
+        
+        if(!$asset = Ativo::find($asset)){
+
+            return redirect()->route('admin.ativos')->with('asset-not-found', 'Ativo não encontrado');
+        }
+
+        $asset->update($request->only([
+
+            'name_asset',
+            'type',
+            'serial_number',
+            'description',
+            'validity',
+            'condition'
+
+        ]));
+
+        return redirect()->route('admin.ativos')->with('success', 'Ativo editado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ativo $ativo)
+    public function destroy(Ativo $asset)
     {
         //
     }
