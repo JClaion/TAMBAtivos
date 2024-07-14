@@ -17,7 +17,11 @@ class BlocoSetorFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            
+            'block_sector',
+            'quantity_assets',
+            'sub_equipament'
+            
         ];
     }
 }

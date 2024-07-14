@@ -12,29 +12,68 @@ class AtivoController extends Controller
      */
     public function index()
     {
-        //
+        $assets = ativo::paginate(10);
+        return view('admin.produtos.ativo', ['assets' => $assets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.produtos.cad_ativo');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        // $name_asset = $request->name_asset;
+        // $type = $request->type;
+        // $serial_number = $request->serial_number;
+        // $description = $request->description;
+        // $validity = $request->validity;
+        // $condition = $request->condition;
+        // $tb_item_id_fk = $request->tb_item_id_fk;
+        // $tb_local_id_fk = $request->tb_local_id_fk;
+
+        $validatedData = $request->validate([
+            'name_asset' => 'required|string|max:255',
+            'type' => 'required|string|max:10',
+            'description' => 'required|string',
+            'serial_number' => 'required|string|max:45',
+            'validity' => 'required|date',
+            'condition' => 'required|string|max:15',
+            'tb_local_id_fk' => 'required|exists:localizacaos,id',
+            'tb_item_id_fk' => 'required|exists:items,id',
+
+        ], 
+        [
+            'name_asset.required' => 'O nome do ativo e obrigatório',
+            'name_asset.max' => 'Não é possível passar de 255 caracteres.',
+
+            'type.required' => 'O nome do tipo é obrigatório',
+            'type.max' => 'Não é possível passar de 10 caracteres.',
+
+            'description.required' => 'A descrição é obrigatória',
+
+            'validity.required' => 'A data de validade é obrigatória',
+
+            'condition.required' => 'O campo de condição é obrigatório.',
+            'condition.max' => 'Não é possível passar de 15 caracteres.',
+
+            'tb_local_id_fk.required' => 'O local é obrigatório',
+   
+            'tb_item_id_fk.required' => 'O item é obrigatório',
+
+            'serial_number.required' => 'O número serial é obrigatório',
+            'serial_number.max' => 'O número serial deve ter, no máximo, 45 caracteres'
+
+        ]);
+
+        Ativo::create($validatedData);
+        return redirect()->route('admin.ativo.index')->with('sucess', 'Ativo cadastrado com sucesso');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ativo $ativo)
+    public function show(Ativo $assets)
     {
         //
     }
@@ -42,23 +81,44 @@ class AtivoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ativo $ativo)
+    public function edit(Ativo $asset)
     {
-        //
+        if(!$asset = Ativo::find($asset)){
+
+            return redirect()->route('admin.ativos')->with('asset-not-found', 'Ativo não encontrado');
+        }
+
+        return view('admin.produtos.ativos_edit', compact('asset'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ativo $ativo)
+    public function update(Request $request, Ativo $asset)
     {
-        //
+        
+        if(!$asset = Ativo::find($asset)){
+
+            return redirect()->route('admin.ativos')->with('asset-not-found', 'Ativo não encontrado');
+        }
+
+        $asset->update($request->only([
+
+            'name_asset',
+            'type',
+            'serial_number',
+            'description',
+            'validity',
+            'condition'
+
+        ]));
+
+        return redirect()->route('admin.ativos')->with('success', 'Ativo editado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ativo $ativo)
+    
+    public function destroy(Ativo $asset)
     {
         //
     }

@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlocoSetor extends Model
 {
+
+    protected $table = 'block_sectors';
+    
     use HasFactory;
 }
